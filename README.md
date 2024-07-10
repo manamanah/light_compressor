@@ -87,7 +87,7 @@ In order to start compression, just call [LightCompressor().compressVideo()] and
    1) saveAt: The location where the video should be saved externally. This value will be ignored if isSharedStorage is `false`.
    2) isSharedStorage: Whether to save the output video in Android's Shared or App-Specific storage. Refer to this https://developer.android.com/training/data-storage.
 5) `ios`: which contains configurations specific to iOS and macOS; - **required**
-   1) saveInGallery: To decide saving the video in gallery or not. This defaults to `true`.
+   1) saveInGallery: To decide saving the video in gallery or in App-Specific storage. This defaults to `true`.
 6) `video`: contains configurations of the output video:
    1) videoName: The name of the output video file. - **required**
    2) keepOriginalResolution: to keep the original video height and width when compressing.

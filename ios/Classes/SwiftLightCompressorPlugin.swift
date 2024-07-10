@@ -31,8 +31,21 @@ public class SwiftLightCompressorPlugin: NSObject, FlutterPlugin, FlutterStreamH
                let videoQuality : String = myArgs["videoQuality"] as? String {
                 
                 var desPath: URL
-                
-                desPath = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(videoName).mp4")
+                if (saveInGallery ?? false) {
+                    desPath = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(videoName).mp4")
+                } else {
+                    if #available(iOS 16.0, *) {
+                        desPath = URL.documentsDirectory.appending(path: "\(videoName).mp4")
+                    } else {
+                        desPath = try FileManager.default.url(
+                                        for: .documentDirectory,
+                                        in: .userDomainMask,
+                                        appropriateFor: nil,
+                                        create: false,
+                                    )
+                                    . appendingPathComponent("\(videoName).mp4")
+                    }
+                }
                 try? FileManager.default.removeItem(at: desPath)
                 
                 let videoCompressor = LightCompressor()
